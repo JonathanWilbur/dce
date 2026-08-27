@@ -38,7 +38,12 @@ a useful reference for validating my OSI stack implementation in
 
 ## Notes
 
-- This does not build on Linux, I think. It was never ported.
+- The original ODE-based DCE daemons do not build on modern Linux.
+- A GNU Make **Linux userspace port** lives in `linux/`. It follows the
+  *OSF DCE Porting and Testing Guide* (`make pdf` → `docout/PORTING_GUIDE.pdf`):
+  native NPTL instead of CMA user threads, 32-bit NDR `long` types on LP64,
+  and new makefiles instead of ODE. Build and test with `make linux` and
+  `make linux-test`. See `linux/README.md`.
 - The OSI networking stack seems to have been developed by Siemens, so it might
   be an ancestor of the code used in Dir.X.
 - The OSI networking stack can run over TCP/IP (IETF RFC 1006 / ITOT). I
