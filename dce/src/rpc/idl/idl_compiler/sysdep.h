@@ -276,7 +276,7 @@
 #define USER_INCLUDE_H_TEMPLATE "#include <%s.h>\n"
 #endif
 
-#if defined(__OSF__) || defined(__OSF1__) || defined(__osf__) || defined(BSD) || defined(SYS5) || defined(ultrix) || defined(_AIX) || defined(__ultrix) || defined(_BSD) || defined(SNI_SVR4) || defined(SNI_UMIPS)
+#if defined(__OSF__) || defined(__OSF1__) || defined(__osf__) || defined(BSD) || defined(SYS5) || defined(ultrix) || defined(_AIX) || defined(__ultrix) || defined(_BSD) || defined(SNI_SVR4) || defined(SNI_UMIPS) || defined(__linux__)
 #define UNIX
 #define HASDIRTREE
 #define HASPOPEN
@@ -335,6 +335,8 @@ Porting Message:  You must provide definitions for the symbols
 #  define CPP "/usr/lib/cpp "
 # elif defined(SNI_SVR4)
 #  define CPP "/usr/ccs/lib/cpp"
+# elif defined(__linux__)
+#  define CPP "gcc -E"
 # elif __hpux1000p
 #  define CPP "/opt/langtools/lbin/cpp"
 # else
@@ -429,6 +431,8 @@ Porting Message:  You must provide definitions for the files suffixes to
 #  define CC_DEF_CMD "/opt/bin/dce/dce_cc -c"
 # elif defined(SNI_SVR4V3)
 #  define CC_DEF_CMD "/opt/dcelocal/bin/cc -c"
+# elif defined(__linux__)
+#  define CC_DEF_CMD "gcc -c"
 # else
 #  define CC_DEF_CMD "cc -c"
 # endif
@@ -445,6 +449,8 @@ Porting Message:  You must provide definitions for the files suffixes to
 #  define CXX_DEF_CMD "xlC -c"
 # elif defined(__hpux)
 #  define CXX_DEF_CMD "CC -D_HPUX_SOURCE -c"
+# elif defined(__linux__)
+#  define CXX_DEF_CMD "g++ -c"
 # else
 #  define CXX_DEF_CMD "cxx -c"
 # endif
@@ -577,6 +583,14 @@ Porting Message:  You must provide definitions for the files suffixes to
 #define OSF_LEX_YACC
 #endif
 
+#if defined(__linux__)
+#define LINUX_LEX_YACC
+#ifndef YACC_VAR
+#define YACC_VAR extern
+#define YACC_INT int
+#endif
+#endif
+
 #if defined(_AIX) || defined(__osf__)
 #define AIX_LEX_YACC
 #define AIX_YACC_VAR extern
@@ -624,7 +638,7 @@ Porting Message:  You must provide definitions for the files suffixes to
 #endif
 
 
-#if defined(OSF_LEX_YACC) || defined(ULTRIX_LEX_YACC) || defined(APOLLO_LEX_YACC) || defined(AIX_LEX_YACC) || defined(SUN_LEX_YACC) || defined(HPUX_LEX_YACC) || defined(SVR4_LEX_YACC) || defined(UMIPS_LEX_YACC)
+#if defined(OSF_LEX_YACC) || defined(ULTRIX_LEX_YACC) || defined(APOLLO_LEX_YACC) || defined(AIX_LEX_YACC) || defined(SUN_LEX_YACC) || defined(HPUX_LEX_YACC) || defined(SVR4_LEX_YACC) || defined(UMIPS_LEX_YACC) || defined(LINUX_LEX_YACC)
 
 /*
  * The constants below are defined by the output of LEX.  They are not

@@ -1,0 +1,8 @@
+/*
+ * Linux-specific notes for DCE Threads.
+ *
+ * PORTING_GUIDE.pdf chapter 4.1: Linux NPTL is a kernel-thread POSIX
+ * pthreads library, so this port does not compile CMA user-level
+ * context-switch assembly (cma_assem.s). The draft-4 DCE pthread API
+ * and TRY/CATCH package live in linux/src/dcethreads.c.
+ */

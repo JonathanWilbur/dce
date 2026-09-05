@@ -56,7 +56,7 @@ PDF_FILES = \
 	$(DOCOUT)/DFS_MH_SERVER_TEST_PLAN.pdf \
 	$(DOCOUT)/DFS_SEC_ENH_TEST_PLAN.pdf
 
-.PHONY: pdf aespdf
+.PHONY: pdf aespdf linux linux-test linux-clean
 pdf: $(PDF_FILES)
 
 $(DOCOUT):
@@ -151,3 +151,14 @@ cleandoc:
 	rm $(AES_SECURITY_PDF)
 	rm $(AES_TIME_PDF)
 	rm $(AES_THREADS_PDF)
+
+# Linux userspace port (see linux/README.md). ODE does not run on GNU/Linux;
+# this GNU Make target builds the ported threads, UUID, and tests.
+linux:
+	$(MAKE) -C linux
+
+linux-test:
+	$(MAKE) -C linux test
+
+linux-clean:
+	$(MAKE) -C linux clean
